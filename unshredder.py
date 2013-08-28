@@ -5,13 +5,7 @@ import argparse
 
 class ShreddedImage(object):
     def __init__(self, image):
-        self.image = Image.open(image)
-        self.size = self.width, self.height = self.image.size
-
-
-class Slice(object):
-    def __init__(self, image):
-        self.image = image
+        self.obj_img = Image.open(image)
         self.size = self.width, self.height = self.image.size
 
 
@@ -67,7 +61,7 @@ def save(image, match_li, shred_li):
             temp.insert(i, match_li[temp[i - 1]])
 
     for i, k in enumerate(temp):
-        shredded.paste(shred_li[k].image, (shred_width * i, 0))
+        shredded.paste(shred_li[k], (shred_width * i, 0))
 
     shredded.save("unshredded_image.png")
 
@@ -77,9 +71,9 @@ def split(image):
     shreds = {}
     shred_li = []
     for x in xrange(0, image.width, shred_w):
-        img = image.image.crop((x, 0, shred_w + x, image.height))
-        shreds[x] = Slice(img)
-        shred_li.append(Slice(img))
+        img = image.obj_img.crop((x, 0, shred_w + x, image.height))
+        shreds[x] = img
+        shred_li.append(img)
 
     return shreds, shred_li
 
