@@ -1,5 +1,4 @@
 from PIL import Image
-import ipdb
 import argparse
 
 
@@ -56,9 +55,9 @@ def find_next(shreds, src_key):
 
 
 def save(image, match_li, shred_li):
-    SHREDS = 20
+    shreds = 20
     shredded = Image.new("RGBA", image.size)
-    shred_width = image.width / SHREDS
+    shred_width = image.width / shreds
     temp = []
     temp.insert(0, 0)
 
@@ -85,7 +84,6 @@ def split(image):
 
 
 def main():
-    # ipdb.set_trace()
     parser = argparse.ArgumentParser(description='unshredder')
     parser.add_argument('image', help='image to be unshredded')
     args = parser.parse_args()
